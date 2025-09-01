@@ -4,6 +4,7 @@ import { readFile, writeFile } from '../helpers/file-helpers';
 
 const DATABASE_PATH = '/src/database.json';
 
+import { HitCounter } from './components';
 /*
 `readFile` takes 1 argument:
 • the path to the file:
@@ -31,7 +32,9 @@ function Home() {
   return (
     <main>
       <h1>Welcome!</h1>
-      <p>You are visitor number {newHits}.</p>
+      <p>
+        You are visitor number <HitCounter hits={newHits} />
+      </p>
     </main>
   );
 }
