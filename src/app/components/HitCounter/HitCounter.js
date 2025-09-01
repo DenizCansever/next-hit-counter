@@ -1,15 +1,29 @@
-'use client';
+import { readFile, writeFile } from '../../../helpers/file-helpers';
 
-import { useState } from 'react';
+/*
+`readFile` takes 1 argument:
+• the path to the file:
 
-export default function HitCounter({ hits }) {
-  const [isCensored, setIsCensored] = useState(true);
+readFile('/path/to/file');
 
-  return (
-    <button
-      onClick={() => setIsCensored(!isCensored)}
-      className={isCensored ? 'censored' : ''}>
-      {hits}
-    </button>
-  );
+`writeFile` takes 2 arguments:
+• The path to the file
+• The new contents for the file
+
+writeFile(
+  '/path/to/file',
+  '{ "hello": "world" }'
+);
+*/
+
+const DATABASE_PATH = '/src/database.json';
+
+export default function HitCounter() {
+  let { hits } = JSON.parse(readFile(DATABASE_PATH));
+
+  hits += 1;
+
+  writeFile(DATABASE_PATH, JSON.stringify({ hits }));
+
+  return hits;
 }
